@@ -1,6 +1,6 @@
-# claude-code-skills
+# agent skills
 
-A collection of [Claude Code skills](https://docs.anthropic.com/en/docs/claude-code/skills) that automate daily development workflows. Each skill is a self-contained directory with a `SKILL.md` (instructions for Claude) and a `README.md` (instructions for humans).
+A collection of Skills that automate daily development workflows. Each skill is a self-contained directory with a `SKILL.md` (instructions for Claude) and a `README.md` (instructions for humans).
 
 ## Skills
 
