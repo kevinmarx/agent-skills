@@ -1,8 +1,15 @@
 # agent skills
 
-A collection of Skills that automate daily development workflows. Each skill is a self-contained directory with a `SKILL.md` (instructions for Claude) and a `README.md` (instructions for humans).
+A collection of skills that automate daily development workflows. Each skill is a self-contained directory with a `SKILL.md` (instructions for the agent) and a `README.md` (instructions for humans).
 
 ## Skills
+
+### km-implement
+
+Turn a plan document into todos and the smallest independently mergeable PRs.
+Uses Copilot CLI autopilot with fleet or subagents in isolated worktrees.
+Dependencies stay inside a PR: no stacked branches, prerequisite PRs, or
+waiting for another plan PR to merge.
 
 ### km-review-check
 
@@ -56,6 +63,22 @@ Detects architectural changes in staged or recent commits (new dependencies, con
 Saves session context (branch, summary, in-flight files, recent commits) at the end of a work session and restores it at the start of the next one.
 
 ## Install
+
+### GitHub Copilot CLI
+
+Install a personal skill by symlinking its directory into `~/.copilot/skills/`:
+
+```bash
+mkdir -p ~/.copilot/skills
+ln -s "$HOME/workspace/km/skills/km-implement" ~/.copilot/skills/km-implement
+```
+
+Use the actual source path if working from a git worktree. Do not overwrite an
+existing installation. In Copilot CLI, run `/skills reload`, then
+`/skills info km-implement` to confirm discovery. See the skill's README for
+autopilot and fleet usage.
+
+### Claude Code
 
 Copy any skill directory into `~/.claude/skills/`:
 
