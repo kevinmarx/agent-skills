@@ -4,6 +4,13 @@ A collection of skills that automate daily development workflows. Each skill is 
 
 ## Skills
 
+### km-architect-and-design
+
+Create evidence-backed technical designs for RFCs, ADRs, architecture proposals,
+migrations, new systems, and substantial refactors. Compares credible
+alternatives and records decisions, compatibility, risks, and acceptance
+criteria before implementation.
+
 ### km-implement
 
 Turn a plan document into todos and the smallest independently mergeable PRs.
