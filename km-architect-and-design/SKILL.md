@@ -1,7 +1,7 @@
 ---
 name: km-architect-and-design
 version: 1.0.0
-description: Creates an evidence-backed, implementation-ready technical design. Use for an RFC, ADR, architecture proposal, major refactor plan, migration design, or new-system design. Do not use for implementation, a brief opinion, or review-only feedback on an existing document.
+description: Creates an evidence-backed, implementation-ready technical design and optionally files an implementation ticket when explicitly requested. Use for an RFC, ADR, architecture proposal, major refactor plan, migration design, or new-system design. Do not use for implementation, a brief opinion, or review-only feedback on an existing document.
 ---
 
 # Architect and Design
@@ -144,9 +144,50 @@ Before declaring the design ready:
 4. Run only existing, relevant documentation or repository checks. If a
    required check or source is unavailable, report the blocker and its impact.
 
-Stop when the design is internally consistent, evidence-backed, implementable,
-and its material uncertainties are explicit. Do not publish it or begin
-implementation without the required authorization.
+For design-only requests, stop when the design is internally consistent,
+evidence-backed, implementable, and its material uncertainties are explicit.
+For an explicitly authorized ticket request, continue to the handoff below.
+Do not begin implementation.
+
+### 7. Optionally Publish an Implementation Ticket
+
+Only create a ticket when the user explicitly asks to file one. Design
+completion alone does not authorize a remote write, and ticket creation does
+not constitute approval of the design or authorization to implement it.
+
+1. Identify the target repository and ticket system; follow its instructions,
+   issue template, required metadata, audience, and permissions. For GitHub,
+   use the correct host and repository. Confirm that `/km-burndown` can read
+   the resulting stable ticket reference; if not, report the handoff gap.
+   Search for an existing ticket covering the same outcome before creating
+   another. Reuse its URL only if its current body already carries the
+   required contract; otherwise obtain authorization to update it or stop
+   with the mismatch. Do not create a duplicate to avoid that decision.
+2. Resolve approval separately from publication. Record **Approved** in the
+   ticket body or repository status only if the owner explicitly approved
+   the goal, material decisions, and acceptance criteria; cite the approval
+   source and date. If filing is authorized but decisions remain open,
+   record **Proposed/Draft** in the ticket body or the repository's status
+   convention, name the owner and holds, and do not claim an
+   implementation-ready handoff. Ask for a material missing decision before
+   filing *as approved*; do not invent the answer.
+3. Draft the issue from the verified design using the repository's template.
+   Keep the outcome, source-backed current state, approved decisions,
+   measurable acceptance criteria, non-goals, safety/rollback constraints,
+   and open holds self-contained. A design link is supplementary: link a
+   pinned, accessible commit or include the normative contract in the issue,
+   never rely on a local-only or mutable document path. Keep secrets and
+   protected/customer evidence out of the ticket. Record implementation
+   ordering only when it is a real constraint; do not preassign dependent
+   PRs or duplicate `/km-burndown`'s live task list.
+4. Create the ticket once, then read it back and verify its URL, repository,
+   body, and proposed/approved status. If creation has an unknown outcome,
+   search for the ticket before retrying; do not produce duplicates or claim
+   success from an unverified write. On failure, return the draft and the
+   specific blocker. When verified, return the ticket URL and the exact
+   next invocation `/km-burndown <ticket-url>`. Do not invoke burndown or
+   implement automatically. Burndown snapshots current progress and hands
+   an immutable plan plus SHA-256 to `/km-implement`.
 
 ## Output
 
@@ -156,4 +197,6 @@ Return:
 - the recommended approach and the decisions that matter most;
 - the evidence and repository conventions consulted;
 - validation performed and any blocked checks; and
-- open questions, assumptions, and any authorization needed for delivery.
+- open questions, assumptions, and any authorization needed for delivery;
+- when ticket publication was requested, the verified ticket URL and status
+  (or the unpublished draft and blocker), followed by the burndown command.
