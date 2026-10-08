@@ -11,6 +11,13 @@ migrations, new systems, and substantial refactors. Compares credible
 alternatives and records decisions, compatibility, risks, and acceptance
 criteria before implementation.
 
+### km-burndown
+
+Turn a GitHub issue or accessible ticket into a sourced, agent-ready burndown:
+verify current implementation and live evidence, separate completed work from
+acceptance gaps, and write a versioned plan with standalone PR slices for
+`/km-implement`.
+
 ### km-implement
 
 Turn a plan document into todos and the smallest independently mergeable PRs.
@@ -77,7 +84,7 @@ Install a personal skill by symlinking its directory into `~/.copilot/skills/`:
 
 ```bash
 mkdir -p ~/.copilot/skills
-ln -s "$HOME/workspace/km/skills/km-implement" ~/.copilot/skills/km-implement
+ln -s "$HOME/workspace/km/claude-code-skills/km-burndown" ~/.copilot/skills/km-burndown
 ```
 
 Use the actual source path if working from a git worktree. Do not overwrite an
