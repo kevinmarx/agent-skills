@@ -15,6 +15,11 @@ the agreed default branch without another planned PR's changes.
 
 - Accept a local plan path, `@file`, pasted plan, or URL accessible to available
   tools. `/km-implement @docs/plan.md` is an invocation, not an options parser.
+  For a saved `/km-burndown` file, require the expected SHA-256 in the
+  invocation and compare it with the file's exact bytes before acting; a
+  missing or mismatched hash blocks implementation. A pasted plan does not
+  require a file hash. Treat the hash as plain-language plan identity, not a
+  CLI flag.
 - This is a prompt-driven skill, not a tool that executes slash commands or
   changes the parent session's mode. Reuse active Copilot autopilot. If it is
   inactive or unverified, explain once that the user can enable `/autopilot`

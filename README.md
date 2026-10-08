@@ -80,17 +80,11 @@ Saves session context (branch, summary, in-flight files, recent commits) at the 
 
 ### GitHub Copilot CLI
 
-Install a personal skill by symlinking its directory into `~/.copilot/skills/`:
-
-```bash
-mkdir -p ~/.copilot/skills
-ln -s "$HOME/workspace/km/claude-code-skills/km-burndown" ~/.copilot/skills/km-burndown
-```
-
-Use the actual source path if working from a git worktree. Do not overwrite an
-existing installation. In Copilot CLI, run `/skills reload`, then
-`/skills info km-implement` to confirm discovery. See the skill's README for
-autopilot and fleet usage.
+Install a personal skill by symlinking its directory into `~/.copilot/skills/`.
+For example, follow the checked-source, non-overwriting
+[km-burndown install steps](km-burndown/README.md#install) from this checkout.
+In Copilot CLI, run `/skills reload`, then `/skills info km-burndown` to
+confirm discovery. See the individual skill READMEs for their usage.
 
 ### Claude Code
 

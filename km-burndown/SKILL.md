@@ -59,17 +59,24 @@ specific work, observable done condition, required evidence, and a stop/block
 condition. Cover the complete path from inputs through effects, failure and
 cleanup to publication and consumption when those belong to the finish line.
 Distinguish code tasks from operator actions, design approvals and final
-acceptance runs. Assign an in-flight PR its remaining work instead of
-duplicating it.
+acceptance runs. Record unfinished open-PR work separately from new slices:
+name the PR, its remaining acceptance criteria and its current owner. Do not
+assign that work to a new default-branch slice. It can be continued in the
+existing PR only when its owner authorizes that work and `/km-implement` can
+verify an eligible same-task branch/worktree to resume; otherwise mark it as
+an external hold. If a new slice needs the unmerged work, resolve whether to
+fold the work into that existing PR or wait for its merge and re-snapshot the
+baseline. Neither duplicating the PR nor publishing a dependent PR is a fix.
 
 Group implementation tasks into the smallest **standalone vertical PR slices**
-that `/km-implement` can build from the default branch. Every remaining
-implementation requirement has exactly one slice owner. Dependencies between
-new code tasks stay **inside** a slice; a planned PR must not require another
-planned PR to merge first. Coalesce coupled producer/reader contracts or
-shared new machinery when they cannot independently build, work and merge in
-any order. Existing merged baseline work may be a prerequisite; an open PR is
-not. Independent research may proceed in parallel even when the eventual code
+that `/km-implement` can build from the default branch. Each remaining
+implementation requirement belongs to exactly one owner: an existing
+in-flight PR or a new slice, never both. Dependencies between new code tasks
+stay **inside** a slice; a planned PR must not require another planned PR to
+merge first. Coalesce coupled producer/reader contracts or shared new
+machinery when they cannot independently build, work and merge in any order.
+Existing merged baseline work may be a prerequisite; an open PR is not.
+Independent research may proceed in parallel even when the eventual code
 belongs to one slice. One writing agent owns each slice/worktree. Do not
 present a list of cross-PR dependencies as an agent-ready implementation plan.
 If acceptance is already fully proven, return no implementation slices rather
@@ -86,13 +93,19 @@ when source-backed; otherwise identify the specific command/proof gap.
 ## 4. Write the `/km-implement` handoff
 
 When the host provides a persistent session workspace, write a Markdown plan
-there named `km-burndown-<repo>-<ticket>.md`; otherwise use a user-supplied
-output path. If neither exists, return the entire plan inline so it can be
-pasted into `/km-implement`. Do not silently add a plan file to source control.
-Record the plan's as-of time, ticket URL and updated time, target repository
-and default-branch SHA, plus a content hash of the saved plan in the handoff
-message when a file was written. A mutable issue URL alone is not a plan
-version; `/km-implement` must recheck volatile facts before acting.
+there using a unique name such as
+`km-burndown-<repo>-<ticket>-<UTC>-<unique-id>.md`; otherwise use a
+user-supplied output directory and a unique filename. Never overwrite an
+existing plan, even at a user-supplied path; ask for a directory or a new
+filename instead. If no durable location exists, return the entire plan inline
+so it can be pasted into `/km-implement`. Do not silently add a plan file to
+source control. Record the plan's as-of time, ticket URL and updated time,
+target repository and default-branch SHA. Hash the finalized file's exact
+bytes with SHA-256 and include that hash in the handoff invocation:
+`/km-implement @<absolute-path> SHA-256: <hash>`. This is a plain-language
+integrity instruction, not a command-line option. A mutable issue URL alone
+is not a plan version; `/km-implement` must recheck volatile facts before
+acting.
 
 Use this structure, adapting the tables to the ticket:
 
@@ -113,6 +126,7 @@ Use this structure, adapting the tables to the ticket:
 **Done when:** <implementation, negative paths, exact acceptance evidence>
 **Independence:** <why it works without other planned PRs>
 
+## In-flight PR work (not new slices)
 ## Operator actions, owner decisions and blockers
 ## Acceptance matrix and final readback
 ## Handoff to /km-implement
@@ -123,5 +137,6 @@ coherent slice with internal tasks; do not force a PR per task. Mark a plan
 **provisional** if scope-changing decisions or unsupported acceptance claims
 remain. State which authorized work can proceed and which must wait for a named
 decision. End with the exact existing `@<absolute-path>` to pass to
-`/km-implement`, or say to paste the inline plan. Do not claim approval,
-successful live runs, or hands-free execution merely by producing the plan.
+`/km-implement` and its expected SHA-256, or say to paste the inline plan.
+Do not claim approval, successful live runs, or hands-free execution merely
+by producing the plan.

@@ -28,36 +28,43 @@ accessible connector and a stable ticket reference. Build/pipeline evidence is
 queried only when it matters to the issue's acceptance criteria; this skill
 does not queue a run or alter the ticket.
 
-The skill writes a self-contained, dated Markdown handoff in the host's
-persistent session workspace (or a requested output path), then gives the
-exact `@` path and file hash. If no durable output location is available, it
-prints the plan to paste into `/km-implement`:
+The skill writes a self-contained, dated Markdown handoff to a **new,
+non-overwriting filename** in the host's persistent session workspace (or a
+requested output directory), then gives the exact `@` path and SHA-256.
+Pass both to `/km-implement`, which verifies the file before acting. If no
+durable output location is available, paste the inline plan instead:
 
 ```text
-/km-implement @/absolute/path/to/km-burndown-repo-1234.md
+/km-implement @/absolute/path/to/km-burndown-repo-1234-<unique-id>.md SHA-256: <hash>
 ```
 
 Review any **Provisional** holds first; `/km-implement` will recheck the
 plan's base and volatile PR/run status, and must not invent a missing owner
-decision. `/km-burndown` is a planning skill, not an implementation, review,
-deployment or automatic ticket-update command.
+decision. Open PRs are tracked as in-flight work, not silently reassigned as
+new default-branch PR slices; dependent new work waits for a verified
+continuation or an updated baseline. `/km-burndown` is a planning skill, not
+an implementation, review, deployment or automatic ticket-update command.
 
 ## Install
 
-Supported hosts: GitHub Copilot CLI and Claude Code. In this repo's checkout,
-symlink the skill directory without replacing an existing installation:
+Supported hosts: GitHub Copilot CLI and Claude Code. From the root of the
+checkout containing this skill, symlink it without replacing an existing
+installation:
 
 ```bash
-source="$HOME/workspace/km/claude-code-skills/km-burndown"
+source="$(pwd -P)/km-burndown"
 destination="$HOME/.copilot/skills/km-burndown"
-if [ -e "$destination" ] || [ -L "$destination" ]; then
+if [ ! -f "$source/SKILL.md" ]; then
+  printf 'Skill source not found: %s\n' "$source" >&2
+  false
+elif [ -e "$destination" ] || [ -L "$destination" ]; then
   printf 'Existing installation left unchanged: %s\n' "$destination"
 else
   mkdir -p "$HOME/.copilot/skills" && ln -s "$source" "$destination"
 fi
 ```
 
-Use the actual worktree source path if the skill has not yet landed in the
-usual checkout. In Copilot CLI, run `/skills reload` and
-`/skills info km-burndown` after installing. For Claude Code, copy or symlink
-`km-burndown/` to `~/.claude/skills/km-burndown`.
+This works in the usual checkout or a worktree. In Copilot CLI, run
+`/skills reload`, then `/skills info km-burndown` to verify discovery. For
+Claude Code, copy or symlink `km-burndown/` to
+`~/.claude/skills/km-burndown`.
