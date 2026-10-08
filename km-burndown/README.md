@@ -35,7 +35,7 @@ Pass both to `/km-implement`, which verifies the file before acting. If no
 durable output location is available, paste the inline plan instead:
 
 ```text
-/km-implement @/absolute/path/to/km-burndown-repo-1234-<unique-id>.md SHA-256: <hash>
+/km-implement @/absolute/path/to/km-burndown-repo-1234-<unique-id>.md Verify this file's SHA-256 is <hash> before acting; stop if it differs.
 ```
 
 Review any **Provisional** holds first; `/km-implement` will recheck the

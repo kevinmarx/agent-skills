@@ -102,10 +102,10 @@ so it can be pasted into `/km-implement`. Do not silently add a plan file to
 source control. Record the plan's as-of time, ticket URL and updated time,
 target repository and default-branch SHA. Hash the finalized file's exact
 bytes with SHA-256 and include that hash in the handoff invocation:
-`/km-implement @<absolute-path> SHA-256: <hash>`. This is a plain-language
-integrity instruction, not a command-line option. A mutable issue URL alone
-is not a plan version; `/km-implement` must recheck volatile facts before
-acting.
+`/km-implement @<absolute-path> Verify this file's SHA-256 is <hash> before
+acting; stop if it differs.` This is a plain-language integrity instruction,
+not a command-line option. A mutable issue URL alone is not a plan version;
+`/km-implement` must recheck volatile facts before acting.
 
 Use this structure, adapting the tables to the ticket:
 
