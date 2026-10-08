@@ -55,6 +55,10 @@ then optionally use fleet:
 
 Without fleet, invoke `/km-implement @docs/plan.md`; native subagents can still
 be used. Inputs may also be a local path, pasted plan, or accessible URL.
+For a saved `/km-burndown` handoff, pass the generated `@<path>` and
+`SHA-256: <hash>` together. `/km-implement` verifies the file's exact bytes
+before acting and stops if the hash is absent or different; pasted plans do
+not need a file hash.
 Shift+Tab cycles session modes. The skill cannot execute slash commands to
 toggle its parent session, and will not launch a nested CLI to enable autopilot.
 
