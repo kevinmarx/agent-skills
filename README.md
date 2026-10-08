@@ -9,7 +9,8 @@ A collection of skills that automate daily development workflows. Each skill is 
 Create evidence-backed technical designs for RFCs, ADRs, architecture proposals,
 migrations, new systems, and substantial refactors. Compares credible
 alternatives and records decisions, compatibility, risks, and acceptance
-criteria before implementation.
+criteria before implementation. On explicit request, files a verified
+implementation ticket for `/km-burndown`; it never starts implementation.
 
 ### km-burndown
 
