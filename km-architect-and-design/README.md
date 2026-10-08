@@ -72,6 +72,9 @@ must contain its goal, decisions and their approval status, acceptance
 criteria, non-goals, and remaining holds; a local-only design path is not a
 usable link. If the user authorized filing but not the unresolved decisions,
 the ticket stays **Proposed/Draft** and is not an approved implementation plan.
+If creation times out, the skill checks recent repository issues; an
+unresolved outcome stops rather than risking a duplicate. A failed or
+unverified publication returns the draft and blocker, not a burndown command.
 
 The verified ticket URL becomes the next input; these commands are separate
 user-initiated steps, not actions the architect skill performs:

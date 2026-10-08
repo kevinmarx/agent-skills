@@ -182,12 +182,14 @@ not constitute approval of the design or authorization to implement it.
    PRs or duplicate `/km-burndown`'s live task list.
 4. Create the ticket once, then read it back and verify its URL, repository,
    body, and proposed/approved status. If creation has an unknown outcome,
-   search for the ticket before retrying; do not produce duplicates or claim
-   success from an unverified write. On failure, return the draft and the
-   specific blocker. When verified, return the ticket URL and the exact
-   next invocation `/km-burndown <ticket-url>`. Do not invoke burndown or
-   implement automatically. Burndown snapshots current progress and hands
-   an immutable plan plus SHA-256 to `/km-implement`.
+   inspect recent issues directly in the target repository and read back
+   plausible matches. An empty or incomplete search does not prove the write
+   failed. If the outcome remains uncertain, stop with the draft and blocker;
+   retry only after a definitive no-write result. Do not produce duplicates
+   or claim success from an unverified write. When verified, return the ticket
+   URL and the exact next invocation `/km-burndown <ticket-url>`. Do not
+   invoke burndown or implement automatically. Burndown snapshots current
+   progress and hands an immutable plan plus SHA-256 to `/km-implement`.
 
 ## Output
 
@@ -198,5 +200,6 @@ Return:
 - the evidence and repository conventions consulted;
 - validation performed and any blocked checks; and
 - open questions, assumptions, and any authorization needed for delivery;
-- when ticket publication was requested, the verified ticket URL and status
-  (or the unpublished draft and blocker), followed by the burndown command.
+- when ticket publication was requested and verified, the ticket URL and
+  status followed by `/km-burndown <ticket-url>`; otherwise, only the
+  unpublished draft and blocker, with no burndown invocation.
