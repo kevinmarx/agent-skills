@@ -7,11 +7,19 @@ evidence when the ticket requires it. It reports what is implemented separately
 from what has actually passed acceptance.
 
 The output groups remaining code into independently mergeable, complete PR
-slices, with concrete tasks and **internal** dependencies for agents. It also
-names operator actions, owner decisions, proof gaps and the final acceptance
-runs. If tasks need each other's new code, they stay in the same slice rather
-than becoming prerequisite PRs. A draft ticket produces a provisional plan;
-it does not grant approval to implement unresolved decisions.
+slices targeting **10 or fewer changed files per PR**, including tests, docs,
+configuration and generated files. Each slice lists its expected changed paths
+and total; `/km-implement` must check the actual full PR diff before publication.
+Required tests and safeguards stay with their behavior. A slice that cannot
+safely fit needs your approval for a larger PR or revised scope, not an
+automatic exception.
+
+The plan includes concrete tasks and **internal** dependencies for agents,
+operator actions, owner decisions, proof gaps and final acceptance runs. If
+tasks need each other's new code, they stay in the same slice rather than
+becoming prerequisite PRs. A draft ticket or unresolved file-budget exception
+produces a provisional plan; it does not grant approval to implement unresolved
+decisions.
 
 ## Use
 

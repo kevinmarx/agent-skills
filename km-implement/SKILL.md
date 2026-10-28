@@ -1,15 +1,16 @@
 ---
 name: km-implement
-version: 1.0.0
+version: 1.1.0
 description: Implement a supplied plan document as the smallest independently mergeable, non-stacked pull requests, using Copilot fleet or subagents and an already-active autopilot session. Use when asked to execute a plan into standalone PRs, not when merely asked to design or discuss a plan.
 ---
 
 # KM Implement
 
 Turn an approved plan into complete, standalone PRs. Optimize for the smallest
-coherent vertical slices, not file counts or lines of code. Every resulting PR
-must be correct, buildable, testable, and safely mergeable in any order against
-the agreed default branch without another planned PR's changes.
+coherent vertical slices within any approved file budget, not artificial
+file packing. Every resulting PR must be correct, buildable, testable, and
+safely mergeable in any order against the agreed default branch without another
+planned PR's changes.
 
 ## Runtime and authority
 
@@ -77,6 +78,10 @@ migrations, contracts, configuration, and rollout/rollback measures that behavio
 needs. Existing baseline prerequisites are permitted. Newly planned PR
 prerequisites are forbidden, even when every PR targets the default branch.
 
+Honor any per-PR file budget in the plan. Count the full PR diff, including
+source, tests, docs, configuration, generated files, additions and deletions;
+an authorized continuation includes the PR's earlier changes too.
+
 For every proposed slice, explain why it can work and merge before, after, or
 without every sibling PR:
 
@@ -93,6 +98,8 @@ without every sibling PR:
 - Legitimate repository-required rollout controls belong to a complete slice;
   they are not permission to omit the slice's dependencies or effects.
 - If the plan is intrinsically coupled, deliver one coherent larger PR.
+  If that exceeds the approved file budget, stop for the user's approval of an
+  exception or revised scope; do not silently raise the budget.
   Coupling across repositories that cannot fit a standalone safe PR needs a
   named plan decision; do not claim an atomic multi-repository merge sequence.
 
@@ -199,8 +206,10 @@ toolchain, auth, infrastructure, or type-check coverage is a specific proof gap,
 not a pass. Follow target push-to-start-CI policy when local validation is
 unavailable; report the gap instead of substituting an unverified assertion.
 
-Before publishing, recheck coupling and cumulative scope. Commit only the
-slice's intended changes, push normally, and open a PR with the explicit
+Before publishing, recheck coupling, cumulative scope and the actual full
+diff's changed-file count against any approved budget. If over budget, replan
+or stop for the user's decision without dropping required work. Commit only
+the slice's intended changes, push normally, and open a PR with the explicit
 verified default-branch base. Inspect and use the actual repository PR template,
 preserving its required sections/comments/checklists and truthful claims.
 

@@ -10,6 +10,11 @@ works without sibling changes, safely merging in any order. Dependencies between
 todos stay inside one PR. Shared new infrastructure or coupled behavior belongs
 in the same complete slice; one larger coherent PR beats fake independence.
 
+The skill honors per-PR file budgets in the supplied plan and checks the full
+changed-file count before publication. If a complete slice cannot fit, it needs
+your approval for an exception or revised scope rather than silently exceeding
+the budget or removing required tests and safeguards.
+
 ## Install for Copilot CLI
 
 Personal skills are discovered in `~/.copilot/skills/` or `~/.agents/skills/`.

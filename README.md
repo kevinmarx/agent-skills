@@ -17,7 +17,7 @@ implementation ticket for `/km-burndown`; it never starts implementation.
 Turn a GitHub issue or accessible ticket into a sourced, agent-ready burndown:
 verify current implementation and live evidence, separate completed work from
 acceptance gaps, and write a versioned plan with standalone PR slices for
-`/km-implement`.
+`/km-implement`, targeting 10 or fewer changed files per PR.
 
 ### km-implement
 
