@@ -1,7 +1,7 @@
 ---
 name: km-burndown
-version: 1.0.0
-description: Turn a GitHub issue or accessible ticket into an evidence-backed, agent-ready burndown plan for /km-implement. Use when asked what remains on a ticket or to prepare a ticket for implementation; do not implement it.
+version: 1.1.0
+description: Turn a GitHub issue or accessible ticket into an evidence-backed, agent-ready burndown plan for /km-implement, targeting 10 or fewer changed files per PR. Use when asked what remains on a ticket or to prepare a ticket for implementation; do not implement it.
 ---
 
 # KM Burndown
@@ -82,6 +82,23 @@ present a list of cross-PR dependencies as an agent-ready implementation plan.
 If acceptance is already fully proven, return no implementation slices rather
 than manufacturing work.
 
+Target **10 or fewer changed files per PR**. For each slice, list the expected
+changed paths and total across the full diff from the inspected default branch,
+including source, tests, docs, configuration, generated files, additions and
+deletions. For an authorized continuation, count the whole PR, not just the
+planned follow-up edits. Mark uncertain paths or counts as unverified.
+
+Look for smaller independent outcomes before accepting a slice: separate
+unrelated behaviors or consumers when each can work and merge alone. Keep
+required tests, docs and safeguards with their behavior. Do not meet the target
+by packing code into fewer files, omitting required work, introducing extra
+machinery, or creating prerequisite PRs. If a complete, independent slice
+still needs more than 10 files, explain the coupling and expected minimum
+count, and hold that slice for the user's approval of an exception or revised
+scope. Carry the file budget and any approval into the handoff: `/km-implement`
+must check the actual full PR diff before publication and replan or stop for
+the user's decision if it exceeds the approved budget.
+
 Preserve the ticket's non-goals and applicable repository contracts. Name
 material unknowns, evidence gaps and owner decisions as holds on the
 dependent work, not as permission to invent architecture or claim that
@@ -123,6 +140,7 @@ Use this structure, adapting the tables to the ticket:
 ### S1 — <complete vertical outcome>
 **Owns:** <criterion IDs and paths/PR, or "to investigate">
 **Agent tasks (internal order/dependencies):** <bounded actions>
+**File budget:** <expected changed paths and total; target <=10, or explicit user-approved exception and its source; name uncertainties or an exception hold>
 **Done when:** <implementation, negative paths, exact acceptance evidence>
 **Independence:** <why it works without other planned PRs>
 
@@ -133,10 +151,11 @@ Use this structure, adapting the tables to the ticket:
 ```
 
 If multiple independent slices cannot be justified, give `/km-implement` one
-coherent slice with internal tasks; do not force a PR per task. Mark a plan
-**provisional** if scope-changing decisions or unsupported acceptance claims
-remain. State which authorized work can proceed and which must wait for a named
-decision. End with the exact existing `@<absolute-path>` to pass to
+coherent slice with internal tasks, subject to the file budget; do not force
+a PR per task or silently waive the target. Mark a plan **provisional** if
+scope-changing decisions, unresolved file-budget holds or unsupported acceptance
+claims remain. State which authorized work can proceed and which must wait for
+a named decision. End with the exact existing `@<absolute-path>` to pass to
 `/km-implement` and its expected SHA-256, or say to paste the inline plan.
 Do not claim approval, successful live runs, or hands-free execution merely
 by producing the plan.
