@@ -33,6 +33,12 @@ threads, and resolution state. Separates implementation work from human
 approvals, per-artifact response coverage, reviewer acceptance, and review
 coverage gaps.
 
+### kevin-voice
+
+Kevin's writing voice for emails, messages, posts and docs. Built from his
+sent mail and his edits to Claude drafts: short, plain, specific, and nothing
+he didn't ask for.
+
 ### mystatus
 
 Morning dashboard showing Linear tickets and GitHub PRs scoped by organization. Run `/mystatus mai` or `/mystatus gm` to see what needs attention without visiting multiple UIs.
