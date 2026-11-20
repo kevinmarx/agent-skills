@@ -1,7 +1,7 @@
 ---
 name: tmux-title
 version: 1.0.0
-description: Set the tmux pane title to describe what Claude Code is currently working on. Call this proactively at the start of any task or when context shifts.
+description: Set the tmux pane title (shown in the pane border, per split) to describe what Claude Code is currently working on. Call this proactively at the start of any task or when context shifts.
 ---
 
 # tmux-title
