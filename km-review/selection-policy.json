@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "always": [
+    "generalist"
+  ],
+  "doc_suffixes": [
+    ".md",
+    ".mdx",
+    ".rst",
+    ".txt",
+    ".adoc"
+  ],
+  "doc_lenses": [
+    "docs-and-claims"
+  ],
+  "code_lenses": [
+    "correctness",
+    "behavioral-evidence"
+  ],
+  "panel_code_lenses": [],
+  "panel_min_files": 25,
+  "panel_terms": [
+    "migration*",
+    "auth",
+    "authn",
+    "authz",
+    "authenticat*",
+    "authoriz*",
+    "secret*",
+    "credential*",
+    "token",
+    "tokens",
+    "permission*",
+    "durable",
+    "lease*",
+    "destructive"
+  ],
+  "panel_path_prefixes": [
+    ".github/workflows/",
+    ".gitlab-ci",
+    ".circleci/",
+    "deploy/",
+    "infra/",
+    "helm/",
+    "terraform/",
+    "k8s/"
+  ],
+  "panel_file_names": [
+    "agents.md",
+    "claude.md",
+    "dockerfile",
+    "justfile",
+    "makefile"
+  ],
+  "path_triggers": [
+    {
+      "id": "security-boundary",
+      "terms": [
+        "auth",
+        "authn",
+        "authz",
+        "authenticat*",
+        "authoriz*",
+        "identity",
+        "token",
+        "tokens",
+        "secret*",
+        "credential*",
+        "permission*",
+        "crypto*",
+        "session*",
+        "oauth*",
+        "middleware*",
+        "polic*",
+        "guard*",
+        "jwt*",
+        "csrf",
+        "sanitiz*",
+        "escap*",
+        "login*",
+        "password*"
+      ],
+      "lenses": [
+        "security"
+      ]
+    },
+    {
+      "id": "contracts",
+      "terms": [
+        "api*",
+        "schema*",
+        "proto*",
+        "migration*",
+        "openapi",
+        "graphql",
+        "model*",
+        "dto*",
+        "serializ*",
+        "controller*",
+        "endpoint*",
+        "route*",
+        "routing",
+        "entit*",
+        "dbcontext*",
+        "repositor*"
+      ],
+      "lenses": [
+        "contracts-and-data"
+      ]
+    },
+    {
+      "id": "concurrency",
+      "terms": [
+        "queue*",
+        "worker*",
+        "retr*",
+        "lock*",
+        "scheduler*",
+        "async",
+        "concurren*",
+        "cache*",
+        "pool*",
+        "timeout*",
+        "batch*",
+        "throttl*",
+        "backoff",
+        "stream*",
+        "sync*",
+        "parallel*",
+        "thread*"
+      ],
+      "lenses": [
+        "performance-concurrency"
+      ]
+    },
+    {
+      "id": "operations",
+      "terms": [
+        "deploy*",
+        "pipeline*",
+        "workflow*",
+        "docker*",
+        "helm",
+        "terraform",
+        "config*",
+        "telemetry",
+        "metric*",
+        "logging",
+        "logger*",
+        ".csproj",
+        "appsettings",
+        "web.config",
+        "composer.json",
+        ".env",
+        "startup.cs",
+        "program.cs"
+      ],
+      "lenses": [
+        "operations"
+      ]
+    },
+    {
+      "id": "design",
+      "terms": [
+        "docs/design/",
+        "adr",
+        "adrs",
+        "rfc",
+        "rfcs",
+        "architecture*"
+      ],
+      "lenses": [
+        "architecture"
+      ]
+    }
+  ],
+  "term_syntax": "word = whole path word (camelCase/snake/kebab split); word* = word prefix; anything with / or . = substring"
+}

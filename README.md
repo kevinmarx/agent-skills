@@ -26,6 +26,14 @@ Uses Copilot CLI autopilot with fleet or subagents in isolated worktrees.
 Dependencies stay inside a PR: no stacked branches, prerequisite PRs, or
 waiting for another plan PR to merge.
 
+### km-review
+
+Multi-lens code review of the current branch or an open PR. Freezes an
+immutable diff, selects focused or panel depth, runs read-only specialist
+lenses in parallel, synthesizes with a verifying generalist, and validates
+confirmation, citations, and head freshness deterministically. Designed to be
+copied into other repos and customized.
+
 ### km-review-check
 
 Triage GitHub PR feedback across review summaries, top-level comments, inline
