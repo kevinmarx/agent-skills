@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "policy_version": "1.0.0",
+  "lenses": [
+    { "id": "security", "prompt": "lenses/security.md", "stage": "parallel", "responsibility": "Trust boundaries, authorization, credentials, input handling, and external effects." },
+    { "id": "correctness", "prompt": "lenses/correctness.md", "stage": "parallel", "responsibility": "Independent whole-change discovery of logic, state, error-path, and composed-behavior defects." },
+    { "id": "architecture", "prompt": "lenses/architecture.md", "stage": "parallel", "responsibility": "Ownership, dependency direction, lifecycle, design conformance, and avoidable complexity." },
+    { "id": "contracts-and-data", "prompt": "lenses/contracts-and-data.md", "stage": "parallel", "responsibility": "API, schema, wire, and persisted-data contracts, including compatibility with already-deployed or stored data." },
+    { "id": "performance-concurrency", "prompt": "lenses/performance-concurrency.md", "stage": "parallel", "responsibility": "Concurrency, ordering, retries, idempotency, capacity, and resource behavior." },
+    { "id": "operations", "prompt": "lenses/operations.md", "stage": "parallel", "responsibility": "Build, CI, deployment, configuration, rollout/rollback controls, and observability." },
+    { "id": "behavioral-evidence", "prompt": "lenses/behavioral-evidence.md", "stage": "parallel", "responsibility": "Changed assumptions, observable scenarios, and whether tests independently prove the claimed behavior." },
+    { "id": "docs-and-claims", "prompt": "lenses/docs-and-claims.md", "stage": "parallel", "responsibility": "Documentation, runbooks, agent instructions, PR title/body claims, and approved scope." },
+    { "id": "generalist", "prompt": "lenses/generalist.md", "stage": "synthesis", "responsibility": "Verify and confirm findings, cover unowned seams, resolve contradictions, deduplicate, and own correctness when the correctness lens is unselected." }
+  ]
+}
